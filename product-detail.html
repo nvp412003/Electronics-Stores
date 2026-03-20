@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản phẩm - TechShop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-bolt"></i> TechShop
+            </a>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="index.html#products" class="active">Sản phẩm</a></li>
+                    <li><a href="about.html">Giới thiệu</a></li>
+                    <li><a href="login.html">Đăng nhập</a></li>
+                </ul>
+            </nav>
+            
+            <div class="cart-icon" onclick="window.location.href='cart.html'">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count">0</span>
+            </div>
+            
+            <button class="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- Product Detail Section -->
+    <section class="product-detail-section">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Trang chủ</a> / 
+                <a href="index.html#products">Điện thoại</a> / 
+                <span>iPhone 15 Pro Max 256GB</span>
+            </div>
+            
+            <div class="product-detail-layout">
+                <!-- Gallery -->
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="assets/images/phone.png" alt="iPhone 15 Pro Max">
+                    </div>
+                    <div class="thumbnail-list">
+                        <div class="thumbnail active"><img src="assets/images/phone.png" alt="Thumb"></div>
+                        <div class="thumbnail"><img src="assets/images/phone.png" alt="Thumb"></div>
+                        <div class="thumbnail"><img src="assets/images/phone.png" alt="Thumb"></div>
+                        <div class="thumbnail"><img src="assets/images/phone.png" alt="Thumb"></div>
+                    </div>
+                </div>
+                
+                <!-- Info -->
+                <div class="product-info-detail">
+                    <h1>Điện thoại iPhone 15 Pro Max 256GB</h1>
+                    
+                    <div class="product-meta">
+                        <div class="rating-stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                            <span style="color: var(--text-main); font-weight: 500; margin-left: 5px;">4.8 (256 đánh giá)</span>
+                        </div>
+                        <div class="sku">Mã SP: VN/A-15PM-256</div>
+                        <div class="status" style="color: var(--success); font-weight: 500;"><i class="fa-solid fa-check"></i> Còn hàng</div>
+                    </div>
+                    
+                    <div class="product-price-wrapper">
+                        <div class="product-price-large">29.990.000₫</div>
+                        <div class="original-price" style="font-size: 18px;">34.990.000₫</div>
+                    </div>
+                    
+                    <p class="product-short-desc">
+                        iPhone 15 Pro Max thiết kế Titan cứng cáp, chip A17 Pro siêu phân giải, camera télé 5x quang học, nút Action Button mới và cổng sạc USB-C siêu tốc. Trải nghiệm smartphone đẳng cấp nhất.
+                    </p>
+                    
+                    <div class="product-options">
+                        <div class="option-group">
+                            <h4>Màu sắc: <span>Titan tự nhiên</span></h4>
+                            <div class="color-options">
+                                <button class="color-btn active">Tự nhiên</button>
+                                <button class="color-btn">Titan Xanh</button>
+                                <button class="color-btn">Titan Đen</button>
+                                <button class="color-btn">Titan Trắng</button>
+                            </div>
+                        </div>
+                        
+                        <div class="option-group">
+                            <h4>Dung lượng:</h4>
+                            <div class="storage-options">
+                                <button class="storage-btn active">256GB</button>
+                                <button class="storage-btn">512GB</button>
+                                <button class="storage-btn">1TB</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <div class="qty-control" style="height: 50px;">
+                            <button class="qty-btn" onclick="var q=document.getElementById('qty');if(q.value>1)q.value--"><i class="fa-solid fa-minus"></i></button>
+                            <input type="number" id="qty" class="qty-input" value="1" min="1" style="height: 100%; border: none;">
+                            <button class="qty-btn" onclick="var q=document.getElementById('qty');q.value++"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <button class="btn btn-primary btn-cart-large" onclick="addToCartDetail()">
+                            <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng
+                        </button>
+                        <button class="btn btn-cart-large" style="background: var(--danger); color: white;" onclick="window.location.href='checkout.html'">
+                            Mua ngay
+                        </button>
+                    </div>
+                    
+                    <div class="product-features" style="display: flex; flex-direction: column; gap: 15px; margin-top: 30px;">
+                        <div style="display: flex; gap: 10px; align-items: flex-start;">
+                            <i class="fa-solid fa-shield-halved" style="color: var(--primary-color); font-size: 20px; flex-shrink: 0;"></i>
+                            <div>
+                                <h5 style="margin-bottom: 5px;">Bảo hành 12 tháng</h5>
+                                <p style="font-size: 14px; color: var(--text-muted);">Bảo hành chính hãng tại tất cả các trung tâm ủy quyền toàn quốc.</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: flex-start;">
+                            <i class="fa-solid fa-rotate-left" style="color: var(--primary-color); font-size: 20px; flex-shrink: 0;"></i>
+                            <div>
+                                <h5 style="margin-bottom: 5px;">Đổi trả 30 ngày</h5>
+                                <p style="font-size: 14px; color: var(--text-muted);">Miễn phí 1 đổi 1 trong 30 ngày đầu tiên nếu có lỗi phần cứng từ NSX.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reviews -->
+            <div class="reviews-section">
+                <h3>Đánh giá từ khách hàng</h3>
+                
+                <div style="display: flex; gap: 30px; margin-bottom: 40px; align-items: center; background: var(--bg-secondary); padding: 30px; border-radius: var(--radius-md);">
+                    <div style="text-align: center;">
+                        <div style="font-size: 48px; font-weight: 700; color: var(--primary-color);">4.8</div>
+                        <div class="rating-stars" style="font-size: 20px; margin: 10px 0;">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div style="color: var(--text-muted);">256 lượt đánh giá</div>
+                    </div>
+                    <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
+                        <!-- Thống kê đánh giá (chỉ làm layout mẫu) -->
+                        <div style="display: flex; align-items: center; gap: 10px;"><span style="width: 30px;">5 <i class="fa-solid fa-star" style="color:#FFB800; font-size: 12px;"></i></span><div style="flex: 1; background: #e0e0e0; height: 8px; border-radius: 4px;"><div style="width: 85%; background: var(--primary-color); height: 100%; border-radius: 4px;"></div></div><span>85%</span></div>
+                        <div style="display: flex; align-items: center; gap: 10px;"><span style="width: 30px;">4 <i class="fa-solid fa-star" style="color:#FFB800; font-size: 12px;"></i></span><div style="flex: 1; background: #e0e0e0; height: 8px; border-radius: 4px;"><div style="width: 10%; background: var(--primary-color); height: 100%; border-radius: 4px;"></div></div><span>10%</span></div>
+                        <div style="display: flex; align-items: center; gap: 10px;"><span style="width: 30px;">3 <i class="fa-solid fa-star" style="color:#FFB800; font-size: 12px;"></i></span><div style="flex: 1; background: #e0e0e0; height: 8px; border-radius: 4px;"><div style="width: 3%; background: var(--primary-color); height: 100%; border-radius: 4px;"></div></div><span>3%</span></div>
+                        <div style="display: flex; align-items: center; gap: 10px;"><span style="width: 30px;">2 <i class="fa-solid fa-star" style="color:#FFB800; font-size: 12px;"></i></span><div style="flex: 1; background: #e0e0e0; height: 8px; border-radius: 4px;"><div style="width: 1%; background: var(--primary-color); height: 100%; border-radius: 4px;"></div></div><span>1%</span></div>
+                        <div style="display: flex; align-items: center; gap: 10px;"><span style="width: 30px;">1 <i class="fa-solid fa-star" style="color:#FFB800; font-size: 12px;"></i></span><div style="flex: 1; background: #e0e0e0; height: 8px; border-radius: 4px;"><div style="width: 1%; background: var(--primary-color); height: 100%; border-radius: 4px;"></div></div><span>1%</span></div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary">Viết đánh giá</button>
+                    </div>
+                </div>
+                
+                <div class="review-list">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="avatar">H</div>
+                                <div>
+                                    <div class="reviewer-name">Hoàng T. <span style="color: var(--success); font-weight: normal; font-size: 12px; margin-left: 5px;"><i class="fa-solid fa-circle-check"></i> Đã mua hàng</span></div>
+                                    <div class="rating-stars" style="font-size: 12px; margin-top: 5px;">
+                                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="review-date">2 ngày trước</div>
+                        </div>
+                        <div class="review-content">
+                            Sản phẩm nguyên seal, giao hàng cực nhanh trong vòng 2 tiếng. Máy dùng cực kỳ mượt mà, chuyển từ iPhone 13 lên thấy khác biệt hoàn toàn về độ mượt của màn 120Hz và camera rất bá. Đáng tiền!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <a href="index.html" class="footer-logo">
+                    <i class="fa-solid fa-bolt"></i> TechShop
+                </a>
+                <p>TechShop - Nơi cung cấp các sản phẩm công nghệ chính hãng, uy tín và chất lượng với dịch vụ hỗ trợ hàng đầu.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Danh mục</h3>
+                <ul>
+                    <li><a href="index.html#products">Laptop & Macbook</a></li>
+                    <li><a href="index.html#products">Điện thoại thông minh</a></li>
+                    <li><a href="index.html#products">Đồng hồ thông minh</a></li>
+                    <li><a href="index.html#products">Phụ kiện âm thanh</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Hỗ trợ</h3>
+                <ul>
+                    <li><a href="about.html">Chính sách bảo hành</a></li>
+                    <li><a href="about.html">Chính sách đổi trả</a></li>
+                    <li><a href="about.html">Hướng dẫn mua hàng</a></li>
+                    <li><a href="about.html">Tra cứu đơn hàng</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Đăng ký nhận tin</h3>
+                <p>Nhận thông tin ưu đãi mới nhất từ chúng tôi.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email của bạn">
+                    <button type="submit">Đăng ký</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 TechShop. Bản quyền thuộc về TechShop.</p>
+        </div>
+    </footer>
+    
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="script.js"></script>
+    <script>
+        function addToCartDetail() {
+            // Reusing logic from script.js, simulate cart addition
+            let qty = parseInt(document.getElementById('qty').value) || 1;
+            cartCount += qty;
+            const countElement = document.querySelector('.cart-count');
+            countElement.textContent = cartCount;
+            
+            countElement.classList.add('bump');
+            setTimeout(() => { countElement.classList.remove('bump'); }, 300);
+            
+            showToast(`Đã thêm ${qty} sản phẩm vào giỏ hàng!`);
+        }
+        
+        // Option toggling
+        document.querySelectorAll('.color-options .color-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.color-options .color-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelector('.option-group h4 span').textContent = this.textContent;
+            });
+        });
+        
+        document.querySelectorAll('.storage-options .storage-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.storage-options .storage-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

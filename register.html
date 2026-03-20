@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký - TechShop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-bolt"></i> TechShop
+            </a>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="index.html#products">Sản phẩm</a></li>
+                    <li><a href="about.html">Giới thiệu</a></li>
+                    <li><a href="login.html" class="active">Đăng nhập</a></li>
+                </ul>
+            </nav>
+            
+            <div class="cart-icon" onclick="window.location.href='cart.html'">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count">0</span>
+            </div>
+            
+            <button class="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- Auth Section -->
+    <section class="auth-section">
+        <div class="auth-container">
+            <div class="auth-card">
+                <h2>Đăng ký tài khoản</h2>
+                <p class="auth-subtitle">Trở thành thành viên để nhận ưu đãi</p>
+                
+                <form id="registerForm" class="auth-form" action="#">
+                    <div class="form-group">
+                        <label for="name">Họ và tên</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="name" placeholder="Ví dụ: Nguyễn Văn A" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Tài khoản Email</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-envelope"></i>
+                            <input type="email" id="email" placeholder="Nhập email của bạn" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="password" placeholder="Tạo mật khẩu" required>
+                            <i class="fa-regular fa-eye-slash toggle-password"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="re-password">Xác nhận mật khẩu</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="re-password" placeholder="Nhập lại mật khẩu" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full" style="margin-top: 20px;">Đăng ký</button>
+                </form>
+                
+                <p class="auth-footer" style="margin-top: 20px;">Đã có tài khoản? <a href="login.html">Đăng nhập</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <a href="index.html" class="footer-logo">
+                    <i class="fa-solid fa-bolt"></i> TechShop
+                </a>
+                <p>TechShop - Nơi cung cấp các sản phẩm công nghệ chính hãng, uy tín và chất lượng với dịch vụ hỗ trợ hàng đầu.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Danh mục</h3>
+                <ul>
+                    <li><a href="index.html#products">Laptop & Macbook</a></li>
+                    <li><a href="index.html#products">Điện thoại thông minh</a></li>
+                    <li><a href="index.html#products">Đồng hồ thông minh</a></li>
+                    <li><a href="index.html#products">Phụ kiện âm thanh</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Hỗ trợ</h3>
+                <ul>
+                    <li><a href="about.html">Chính sách bảo hành</a></li>
+                    <li><a href="about.html">Chính sách đổi trả</a></li>
+                    <li><a href="about.html">Hướng dẫn mua hàng</a></li>
+                    <li><a href="about.html">Tra cứu đơn hàng</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Đăng ký nhận tin</h3>
+                <p>Nhận thông tin ưu đãi mới nhất từ chúng tôi.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email của bạn">
+                    <button type="submit">Đăng ký</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 TechShop. Bản quyền thuộc về TechShop.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="script.js"></script>
+    <script>
+        document.querySelectorAll('.toggle-password').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                if(input.type === 'password') {
+                    input.type = 'text';
+                    this.classList.replace('fa-eye-slash', 'fa-eye');
+                } else {
+                    input.type = 'password';
+                    this.classList.replace('fa-eye', 'fa-eye-slash');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin tài khoản - TechShop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-bolt"></i> TechShop
+            </a>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="index.html#products">Sản phẩm</a></li>
+                    <li><a href="about.html">Giới thiệu</a></li>
+                    <li><a href="profile.html" class="active">Tài khoản</a></li>
+                </ul>
+            </nav>
+            
+            <div class="cart-icon" onclick="window.location.href='cart.html'">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count">2</span>
+            </div>
+            
+            <button class="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-layout">
+                <!-- Sidebar -->
+                <aside class="profile-sidebar">
+                    <div class="user-avatar-info">
+                        <div class="avatar-placeholder">NT</div>
+                        <div>
+                            <h4>Nguyễn Tiến</h4>
+                            <p style="font-size: 13px; color: var(--text-muted);">Thành viên Bạc</p>
+                        </div>
+                    </div>
+                    <ul class="profile-nav">
+                        <li class="active" onclick="switchTab('info', this)"><i class="fa-regular fa-user" style="width: 20px;"></i> Chi tiết tài khoản</li>
+                        <li onclick="switchTab('orders', this)"><i class="fa-solid fa-box-open" style="width: 20px;"></i> Đơn hàng đã mua</li>
+                        <li onclick="switchTab('security', this)"><i class="fa-solid fa-shield-halved" style="width: 20px;"></i> Đổi mật khẩu</li>
+                        <li><a href="#" id="logoutBtn" style="color: var(--danger);"><i class="fa-solid fa-arrow-right-from-bracket" style="width: 20px;"></i> Đăng xuất</a></li>
+                    </ul>
+                </aside>
+                
+                <!-- Main Content -->
+                <div class="profile-content">
+                    
+                    <!-- Tab: Personal Info -->
+                    <div id="tab-info" class="profile-tab active-tab">
+                        <h3 class="tab-title">Thông tin cá nhân</h3>
+                        <form class="profile-form" style="max-width: 600px;">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Họ và tên</label>
+                                    <div class="input-wrapper">
+                                        <input type="text" value="Nguyễn Tiến">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Số điện thoại</label>
+                                    <div class="input-wrapper">
+                                        <input type="tel" value="0987654321">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Email</label>
+                                <div class="input-wrapper">
+                                    <input type="email" value="nguyentien@example.com" readonly style="background: var(--bg-secondary); cursor: not-allowed;">
+                                </div>
+                                <span style="font-size: 12px; color: var(--text-muted);">Email không thể tự thay đổi. Vui lòng liên hệ CSKH.</span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Giới tính</label>
+                                <div style="display: flex; gap: 20px; margin-top: 10px;">
+                                    <label style="display: flex; align-items: center; gap: 5px; font-weight: normal;"><input type="radio" name="gender" checked> Nam</label>
+                                    <label style="display: flex; align-items: center; gap: 5px; font-weight: normal;"><input type="radio" name="gender"> Nữ</label>
+                                    <label style="display: flex; align-items: center; gap: 5px; font-weight: normal;"><input type="radio" name="gender"> Khác</label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Ngày sinh</label>
+                                <div class="input-wrapper">
+                                    <input type="date" value="1995-10-15">
+                                </div>
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary" style="margin-top: 15px;" onclick="showToast('Đã lưu thông tin tài khoản thành công!')">Lưu thay đổi</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Tab: Orders -->
+                    <div id="tab-orders" class="profile-tab">
+                        <h3 class="tab-title">Đơn hàng của bạn</h3>
+                        
+                        <div class="order-tabs">
+                            <button class="order-tab-btn active">Tất cả</button>
+                            <button class="order-tab-btn">Chờ xác nhận</button>
+                            <button class="order-tab-btn">Đang giao</button>
+                            <button class="order-tab-btn">Đã giao</button>
+                            <button class="order-tab-btn">Đã hủy</button>
+                        </div>
+                        
+                        <!-- Order Item -->
+                        <div class="order-card">
+                            <div class="order-card-header">
+                                <div><span style="color: var(--text-muted);">Mã đơn:</span> <b style="color: var(--primary-color);">#TS88990</b></div>
+                                <div><span style="color: var(--text-muted);">Ngày đặt:</span> 20/03/2026</div>
+                                <div><span class="order-status status-success"><i class="fa-solid fa-check"></i> Đã giao hàng</span></div>
+                            </div>
+                            <div class="order-card-body">
+                                <div style="display: flex; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px dashed var(--border-color);">
+                                    <div style="width: 80px; height: 80px; background: #f8f9fa; border-radius: 8px; padding: 10px; flex-shrink: 0;">
+                                        <img src="assets/images/phone.png" style="width: 100%; height: 100%; object-fit: contain;">
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4 style="margin-bottom: 5px;">Điện thoại iPhone 15 Pro Max 256GB</h4>
+                                        <div style="color: var(--text-muted); font-size: 14px; margin-bottom: 5px;">Màu: Titan xanh | 256GB</div>
+                                        <div>x1</div>
+                                    </div>
+                                    <div style="font-weight: 600; text-align: right;">
+                                        29.990.000₫
+                                    </div>
+                                </div>
+                                
+                                <div style="display: flex; gap: 15px;">
+                                    <div style="width: 80px; height: 80px; background: #f8f9fa; border-radius: 8px; padding: 10px; flex-shrink: 0;">
+                                        <img src="assets/images/audio.png" style="width: 100%; height: 100%; object-fit: contain;">
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4 style="margin-bottom: 5px;">Tai nghe Bluetooth AirPods Pro gen 2</h4>
+                                        <div style="color: var(--text-muted); font-size: 14px; margin-bottom: 5px;">Màu: Trắng</div>
+                                        <div>x1</div>
+                                    </div>
+                                    <div style="font-weight: 600; text-align: right;">
+                                        5.490.000₫
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order-total">
+                                Thành tiền: <span style="font-size: 18px; color: var(--primary-color);">35.480.000₫</span>
+                                <div style="margin-top: 15px; display: flex; justify-content: flex-end; gap: 10px;">
+                                    <button class="btn" style="border: 1px solid var(--border-color);">Xem chi tiết</button>
+                                    <button class="btn btn-primary">Mua lại</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Order Item 2 -->
+                        <div class="order-card">
+                            <div class="order-card-header">
+                                <div><span style="color: var(--text-muted);">Mã đơn:</span> <b style="color: var(--primary-color);">#TS88651</b></div>
+                                <div><span style="color: var(--text-muted);">Ngày đặt:</span> 12/01/2026</div>
+                                <div><span class="order-status status-pending"><i class="fa-solid fa-truck"></i> Đang giao</span></div>
+                            </div>
+                            <div class="order-card-body">
+                                <div style="display: flex; gap: 15px;">
+                                    <div style="width: 80px; height: 80px; background: #f8f9fa; border-radius: 8px; padding: 10px; flex-shrink: 0;">
+                                        <img src="assets/images/laptop.png" style="width: 100%; height: 100%; object-fit: contain;">
+                                    </div>
+                                    <div style="flex: 1;">
+                                        <h4 style="margin-bottom: 5px;">Laptop MacBook Pro 14 M3 Pro 2024</h4>
+                                        <div style="color: var(--text-muted); font-size: 14px; margin-bottom: 5px;">Màu: Bạc | 18GB/512GB</div>
+                                        <div>x1</div>
+                                    </div>
+                                    <div style="font-weight: 600; text-align: right;">
+                                        49.990.000₫
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order-total">
+                                Thành tiền: <span style="font-size: 18px; color: var(--primary-color);">49.990.000₫</span>
+                                <div style="margin-top: 15px; display: flex; justify-content: flex-end; gap: 10px;">
+                                    <button class="btn" style="border: 1px solid var(--border-color);">Đã nhận được hàng</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Tab: Security -->
+                    <div id="tab-security" class="profile-tab">
+                        <h3 class="tab-title">Đổi mật khẩu</h3>
+                        <form class="profile-form" style="max-width: 400px;">
+                            <div class="form-group">
+                                <label>Mật khẩu hiện tại</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-lock"></i>
+                                    <input type="password" placeholder="Nhập mật khẩu cũ" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Mật khẩu mới</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-lock"></i>
+                                    <input type="password" placeholder="Mật khẩu mới (từ 8 ký tự)" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Xác nhận mật khẩu mới</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-lock"></i>
+                                    <input type="password" placeholder="Nhập lại mật khẩu mới" required>
+                                </div>
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary btn-full" style="margin-top: 10px;" onclick="showToast('Đổi mật khẩu thành công!')">Lưu mật khẩu</button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <a href="index.html" class="footer-logo">
+                    <i class="fa-solid fa-bolt"></i> TechShop
+                </a>
+                <p>TechShop - Nơi cung cấp các sản phẩm công nghệ chính hãng, uy tín và chất lượng với dịch vụ hỗ trợ hàng đầu.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Danh mục</h3>
+                <ul>
+                    <li><a href="index.html#products">Laptop & Macbook</a></li>
+                    <li><a href="index.html#products">Điện thoại thông minh</a></li>
+                    <li><a href="index.html#products">Đồng hồ thông minh</a></li>
+                    <li><a href="index.html#products">Phụ kiện âm thanh</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Hỗ trợ</h3>
+                <ul>
+                    <li><a href="about.html">Chính sách bảo hành</a></li>
+                    <li><a href="about.html">Chính sách đổi trả</a></li>
+                    <li><a href="about.html">Hướng dẫn mua hàng</a></li>
+                    <li><a href="about.html">Tra cứu đơn hàng</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Đăng ký nhận tin</h3>
+                <p>Nhận thông tin ưu đãi mới nhất từ chúng tôi.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email của bạn">
+                    <button type="submit">Đăng ký</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 TechShop. Bản quyền thuộc về TechShop.</p>
+        </div>
+    </footer>
+    
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="script.js"></script>
+    <script>
+        // Tab switching logic for profile page
+        function switchTab(tabId, el) {
+            // Remove active classes from all navs
+            document.querySelectorAll('.profile-nav li').forEach(li => li.classList.remove('active'));
+            // Add to clicked nav
+            el.classList.add('active');
+            
+            // Hide all tabs
+            document.querySelectorAll('.profile-tab').forEach(tab => {
+                tab.classList.remove('active-tab');
+            });
+            // Show target tab
+            document.getElementById('tab-' + tabId).classList.add('active-tab');
+        }
+        
+        // Order tab simple visual toggle
+        document.querySelectorAll('.order-tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.order-tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

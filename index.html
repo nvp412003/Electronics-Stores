@@ -3,265 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechNova - Cửa Hàng Thiết Bị Điện Tử</title>
+    <title>TechShop - Thế giới công nghệ trong tầm tay</title>
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-    <!-- Main Style -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Vanilla CSS -->
     <link rel="stylesheet" href="style.css">
-    <!-- Remixicons for Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body>
-
-    <!-- Background Decoration -->
-    <div class="bg-shape shape-1"></div>
-    <div class="bg-shape shape-2"></div>
-
-    <!-- Notification Toast -->
-    <div id="toast-container" class="toast-container"></div>
-
-    <!-- Header / Navbar -->
-    <header class="navbar glass">
-        <div class="container nav-container">
-            <a href="#" class="brand" data-link="home">
-                <i class="ri-instance-fill text-gradient"></i>
-                <span>TechNova</span>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-bolt"></i> TechShop
             </a>
             
-            <nav class="nav-links">
-                <a href="#" class="nav-item active" data-link="home">Trang chủ</a>
-                <a href="#" class="nav-item" data-link="products">Sản phẩm</a>
-            </nav>
-
-            <div class="nav-actions">
-                <a href="#" class="cart-btn" data-link="cart">
-                    <i class="ri-shopping-cart-2-line"></i>
-                    <span class="cart-badge" id="cart-count">0</span>
-                </a>
-                
-                <div id="auth-nav" class="auth-group">
-                    <a href="#" class="btn btn-outline btn-sm" data-link="login">Đăng nhập</a>
-                    <a href="#" class="btn btn-primary btn-sm" data-link="register">Đăng ký</a>
-                </div>
-                
-                <div id="user-nav" class="user-group hidden">
-                    <a href="#" class="user-profile-btn" data-link="profile">
-                        <img src="https://ui-avatars.com/api/?name=User&background=4facfe&color=fff" alt="Avatar" class="avatar-sm">
-                        <span id="nav-username">User</span>
-                    </a>
-                </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm sản phẩm...">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#" class="active">Trang chủ</a></li>
+                    <li><a href="#products">Sản phẩm</a></li>
+                    <li><a href="about.html">Giới thiệu</a></li>
+                    <li><a href="profile.html">Tài khoản</a></li>
+                </ul>
+            </nav>
+            
+            <div class="cart-icon" onclick="window.location.href='cart.html'" style="cursor: pointer;">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count">0</span>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
     </header>
 
-    <!-- Main Content App -->
-    <main id="app-content" class="container main-container">
-        <!-- Content will be injected here by app.js -->
-    </main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span class="badge">Sản phẩm mới</span>
+                <h1>Thế giới công nghệ<br>trong tầm tay</h1>
+                <p>Khám phá các sản phẩm công nghệ tiên tiến nhất với giá cực kỳ ưu đãi. Nâng tầm cuộc sống của bạn ngay hôm nay cùng TechShop.</p>
+                <a href="#products" class="btn btn-primary">Mua ngay <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="hero-image">
+                <img src="assets/images/banner.png" alt="TechShop Banner">
+            </div>
+        </div>
+    </section>
 
-    <!-- Footer -->
-    <footer class="footer glass-dark mt-auto">
+    <!-- Categories Section -->
+    <section class="categories">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>TechNova</h3>
-                    <p>Giải pháp công nghệ tương lai tại nhà bạn.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Chính sách</h4>
-                    <a href="#">Bảo hành</a>
-                    <a href="#">Đổi trả</a>
-                    <a href="#">Vận chuyển</a>
-                </div>
-                <div class="footer-social">
-                    <h4>Kết nối</h4>
-                    <div class="social-icons">
-                        <a href="#"><i class="ri-facebook-circle-fill"></i></a>
-                        <a href="#"><i class="ri-instagram-line"></i></a>
-                        <a href="#"><i class="ri-twitter-x-line"></i></a>
+            <div class="category-grid">
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fa-solid fa-laptop"></i>
                     </div>
+                    <span>Laptop</span>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <span>Điện thoại</span>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+                    <span>Đồng hồ</span>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fa-solid fa-headphones"></i>
+                    </div>
+                    <span>Âm thanh</span>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 TechNova Store. Tạo bởi AI Antigravity.</p>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sản phẩm nổi bật</h2>
+                <a href="#" class="view-all">Xem tất cả <i class="fa-solid fa-angle-right"></i></a>
             </div>
+            <!-- Product Grid from JavaScript -->
+            <div class="product-grid" id="productGrid">
+                <!-- Products will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="contact" class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <a href="#" class="footer-logo">
+                    <i class="fa-solid fa-bolt"></i> TechShop
+                </a>
+                <p>TechShop - Nơi cung cấp các sản phẩm công nghệ chính hãng, uy tín và chất lượng với dịch vụ hỗ trợ hàng đầu.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Danh mục</h3>
+                <ul>
+                    <li><a href="#">Laptop & Macbook</a></li>
+                    <li><a href="#">Điện thoại thông minh</a></li>
+                    <li><a href="#">Đồng hồ thông minh</a></li>
+                    <li><a href="#">Phụ kiện âm thanh</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Hỗ trợ</h3>
+                <ul>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                    <li><a href="#">Hướng dẫn mua hàng</a></li>
+                    <li><a href="#">Tra cứu đơn hàng</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Đăng ký nhận tin</h3>
+                <p>Nhận thông tin ưu đãi mới nhất từ chúng tôi.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email của bạn">
+                    <button type="submit">Đăng ký</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 TechShop. Bản quyền thuộc về TechShop.</p>
         </div>
     </footer>
 
-    <!-- Templates -->
-    <template id="tpl-home">
-        <!-- Home Page Content -->
-        <section class="hero slide-up">
-            <div class="hero-content">
-                <h1 class="hero-title">Khai Sáng <span class="text-gradient">Công Nghệ</span> Của Riêng Bạn</h1>
-                <p class="hero-desc">Khám phá các thiết bị điện tử tối tân nhất, từ laptop gaming đến điện thoại flagship. Đẳng cấp và sức mạnh nằm trong tầm tay bạn.</p>
-                <div class="hero-actions">
-                    <button class="btn btn-primary btn-lg" onclick="app.navigate('products')">Mua Ngay <i class="ri-arrow-right-line"></i></button>
-                    <button class="btn btn-glass btn-lg">Tìm hiểu thêm</button>
-                </div>
-            </div>
-            <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&q=80&w=800" alt="Tech Setup" class="floating-img">
-            </div>
-        </section>
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
 
-        <section class="products-section slide-up delay-1">
-            <div class="section-header">
-                <h2 class="section-title">Sản Phẩm <span class="text-gradient">Nổi Bật</span></h2>
-                <div class="filter-group">
-                    <button class="btn btn-glass btn-sm active">Tất cả</button>
-                    <button class="btn btn-glass btn-sm">Laptop</button>
-                    <button class="btn btn-glass btn-sm">Điện Thoại</button>
-                    <button class="btn btn-glass btn-sm">Phụ Kiện</button>
-                </div>
-            </div>
-            
-            <div class="product-grid" id="featured-products">
-                <!-- Products will be generated by JS -->
-            </div>
-        </section>
-    </template>
-
-    <template id="tpl-products">
-        <section class="products-page fade-in">
-            <h2 class="page-title">Tất cả sản phẩm</h2>
-            <div class="product-grid" id="all-products">
-                <!-- Products -->
-            </div>
-        </section>
-    </template>
-
-    <template id="tpl-login">
-        <section class="auth-page fade-in">
-            <div class="auth-card glass">
-                <div class="auth-header">
-                    <h2>Đăng Nhập</h2>
-                    <p>Chào mừng trở lại TechNova</p>
-                </div>
-                <form id="login-form">
-                    <div class="form-group">
-                        <label for="login-email">Email</label>
-                        <div class="input-icon">
-                            <i class="ri-mail-line"></i>
-                            <input type="email" id="login-email" placeholder="Nhập email của bạn" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="login-password">Mật khẩu</label>
-                        <div class="input-icon">
-                            <i class="ri-lock-2-line"></i>
-                            <input type="password" id="login-password" placeholder="Nhập mật khẩu" required>
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary btn-block">Đăng Nhập</button>
-                    </div>
-                    <p class="auth-switch">Chưa có tài khoản? <a href="#" data-link="register">Đăng ký ngay</a></p>
-                </form>
-            </div>
-        </section>
-    </template>
-
-    <template id="tpl-register">
-        <section class="auth-page fade-in">
-            <div class="auth-card glass">
-                <div class="auth-header">
-                    <h2>Tạo Tài Khoản</h2>
-                    <p>Tham gia vào hệ sinh thái TechNova</p>
-                </div>
-                <form id="register-form">
-                    <div class="form-group">
-                        <label for="reg-name">Họ và Tên</label>
-                        <div class="input-icon">
-                            <i class="ri-user-3-line"></i>
-                            <input type="text" id="reg-name" placeholder="John Doe" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="reg-email">Email</label>
-                        <div class="input-icon">
-                            <i class="ri-mail-line"></i>
-                            <input type="email" id="reg-email" placeholder="Nhập email của bạn" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="reg-password">Mật khẩu</label>
-                        <div class="input-icon">
-                            <i class="ri-lock-2-line"></i>
-                            <input type="password" id="reg-password" placeholder="Tạo mật khẩu" required>
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary btn-block">Đăng Ký</button>
-                    </div>
-                    <p class="auth-switch">Đã có tài khoản? <a href="#" data-link="login">Đăng nhập</a></p>
-                </form>
-            </div>
-        </section>
-    </template>
-
-    <template id="tpl-cart">
-        <section class="cart-page fade-in">
-            <h2 class="page-title">Giỏ Hàng Của Bạn</h2>
-            <div class="cart-container">
-                <div class="cart-items" id="cart-items-list">
-                    <!-- Cart items -->
-                    <div class="empty-cart-msg">Giỏ hàng của bạn đang trống.<br><a href="#" class="btn btn-primary mt-4" data-link="products">Mua sắm ngay</a></div>
-                </div>
-                
-                <div class="cart-summary glass">
-                    <h3>Tổng đơn hàng</h3>
-                    <div class="summary-row">
-                        <span>Tạm tính</span>
-                        <span id="cart-subtotal">0 đ</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Phí vận chuyển</span>
-                        <span>0 đ</span>
-                    </div>
-                    <div class="summary-divider"></div>
-                    <div class="summary-row total">
-                        <span>Tổng cộng</span>
-                        <span class="text-gradient" id="cart-total">0 đ</span>
-                    </div>
-                    <button class="btn btn-primary btn-block mt-4" id="btn-checkout">Tiến Hành Thanh Toán</button>
-                </div>
-            </div>
-        </section>
-    </template>
-
-    <template id="tpl-profile">
-        <section class="profile-page fade-in">
-            <div class="profile-header glass">
-                <div class="profile-info">
-                    <img src="https://ui-avatars.com/api/?name=User&background=4facfe&color=fff&size=120" alt="Avatar" class="avatar-lg" id="profile-avatar">
-                    <div class="profile-details">
-                        <h2 id="profile-name">Người dùng</h2>
-                        <p id="profile-email">user@example.com</p>
-                        <span class="badge">Thành viên Vàng</span>
-                    </div>
-                </div>
-                <button class="btn btn-outline" id="btn-logout">Đăng Xuất <i class="ri-logout-box-r-line"></i></button>
-            </div>
-            
-            <div class="profile-content">
-                <div class="profile-tabs">
-                    <button class="tab-btn active">Lịch sử đơn hàng</button>
-                    <button class="tab-btn">Quản lý tài khoản</button>
-                </div>
-                <div class="tab-content" id="order-history">
-                    <div class="empty-state">
-                        <i class="ri-inbox-line"></i>
-                        <p>Bạn chưa có đơn hàng nào.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </template>
-
-    <!-- Main Logic -->
-    <script src="app.js"></script>
+    <!-- Vanilla Javascript -->
+    <script src="script.js"></script>
 </body>
 </html>

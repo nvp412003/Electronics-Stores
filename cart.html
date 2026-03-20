@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng - TechShop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-bolt"></i> TechShop
+            </a>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="index.html#products">Sản phẩm</a></li>
+                    <li><a href="about.html">Giới thiệu</a></li>
+                    <li><a href="login.html">Đăng nhập</a></li>
+                </ul>
+            </nav>
+            
+            <div class="cart-icon active" onclick="window.location.href='cart.html'">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count">2</span>
+            </div>
+            
+            <button class="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div class="container">
+            <h1 style="margin-bottom: 30px; font-size: 28px;">Giỏ hàng của bạn</h1>
+            
+            <div class="cart-layout">
+                <!-- Items list -->
+                <div class="cart-items">
+                    <div class="cart-header">
+                        <div>Sản phẩm</div>
+                        <div style="text-align: center;">Số lượng</div>
+                        <div style="text-align: right;">Đơn giá</div>
+                        <div style="text-align: right;">Thành tiền</div>
+                    </div>
+                    
+                    <div class="cart-item">
+                        <div class="cart-product-info">
+                            <button class="btn-remove"><i class="fa-regular fa-trash-can"></i></button>
+                            <div class="cart-product-img">
+                                <a href="product-detail.html"><img src="assets/images/phone.png" alt="iPhone 15"></a>
+                            </div>
+                            <div>
+                                <a href="product-detail.html" class="cart-product-title">Điện thoại iPhone 15 Pro Max 256GB</a>
+                                <div style="color: var(--text-muted); font-size: 14px;">Màu: Titan xanh | 256GB</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: center;">
+                            <div class="qty-control">
+                                <button class="qty-btn"><i class="fa-solid fa-minus"></i></button>
+                                <input type="number" class="qty-input" value="1" min="1" readonly>
+                                <button class="qty-btn"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="cart-price" style="text-align: right;">29.990.000₫</div>
+                        <div class="cart-total" style="text-align: right;">29.990.000₫</div>
+                    </div>
+                    
+                    <div class="cart-item">
+                        <div class="cart-product-info">
+                            <button class="btn-remove"><i class="fa-regular fa-trash-can"></i></button>
+                            <div class="cart-product-img">
+                                <a href="product-detail.html"><img src="assets/images/audio.png" alt="AirPods"></a>
+                            </div>
+                            <div>
+                                <a href="product-detail.html" class="cart-product-title">Tai nghe Bluetooth AirPods Pro gen 2</a>
+                                <div style="color: var(--text-muted); font-size: 14px;">Màu: Trắng</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: center;">
+                            <div class="qty-control">
+                                <button class="qty-btn"><i class="fa-solid fa-minus"></i></button>
+                                <input type="number" class="qty-input" value="1" min="1" readonly>
+                                <button class="qty-btn"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="cart-price" style="text-align: right;">5.490.000₫</div>
+                        <div class="cart-total" style="text-align: right;">5.490.000₫</div>
+                    </div>
+                </div>
+                
+                <!-- Summary -->
+                <div class="cart-summary">
+                    <h3 class="summary-title">Tóm tắt đơn hàng</h3>
+                    
+                    <div class="summary-line">
+                        <span>Tạm tính (2 sản phẩm)</span>
+                        <span style="font-weight: 500; color: var(--text-main);">35.480.000₫</span>
+                    </div>
+                    <div class="summary-line">
+                        <span>Phí giao hàng</span>
+                        <span style="color: var(--success); font-weight: 500;">Miễn phí</span>
+                    </div>
+                    <div class="summary-line">
+                        <span>Khuyến mãi</span>
+                        <span>-0₫</span>
+                    </div>
+                    
+                    <div class="summary-total">
+                        <span>Tổng cộng</span>
+                        <span>35.480.000₫</span>
+                    </div>
+                    
+                    <a href="checkout.html" class="btn btn-primary btn-full" style="padding: 15px; font-size: 16px;">Tiến hành thanh toán</a>
+                    <a href="index.html" class="btn btn-full" style="margin-top: 15px; border: 1px solid var(--border-color); color: var(--text-main);">Tiếp tục mua sắm</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <a href="index.html" class="footer-logo">
+                    <i class="fa-solid fa-bolt"></i> TechShop
+                </a>
+                <p>TechShop - Nơi cung cấp các sản phẩm công nghệ chính hãng, uy tín và chất lượng với dịch vụ hỗ trợ hàng đầu.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Danh mục</h3>
+                <ul>
+                    <li><a href="index.html#products">Laptop & Macbook</a></li>
+                    <li><a href="index.html#products">Điện thoại thông minh</a></li>
+                    <li><a href="index.html#products">Đồng hồ thông minh</a></li>
+                    <li><a href="index.html#products">Phụ kiện âm thanh</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Hỗ trợ</h3>
+                <ul>
+                    <li><a href="about.html">Chính sách bảo hành</a></li>
+                    <li><a href="about.html">Chính sách đổi trả</a></li>
+                    <li><a href="about.html">Hướng dẫn mua hàng</a></li>
+                    <li><a href="about.html">Tra cứu đơn hàng</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Đăng ký nhận tin</h3>
+                <p>Nhận thông tin ưu đãi mới nhất từ chúng tôi.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email của bạn">
+                    <button type="submit">Đăng ký</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 TechShop. Bản quyền thuộc về TechShop.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Update mock cart count to 2
+        cartCount = 2;
+    </script>
+</body>
+</html>
