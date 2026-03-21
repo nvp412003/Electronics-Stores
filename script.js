@@ -7,7 +7,8 @@ const products = [
         salePrice: 49990000,
         image: "assets/images/laptop.png",
         badge: "-16%",
-        badgeType: "sale"
+        badgeType: "sale",
+        category: "laptop"
     },
     {
         id: 2,
@@ -16,7 +17,8 @@ const products = [
         salePrice: 29990000,
         image: "assets/images/phone.png",
         badge: "Bán chạy",
-        badgeType: "hot"
+        badgeType: "hot",
+        category: "phone"
     },
     {
         id: 3,
@@ -25,7 +27,8 @@ const products = [
         salePrice: 8990000,
         image: "assets/images/watch.png",
         badge: "-14%",
-        badgeType: "sale"
+        badgeType: "sale",
+        category: "watch"
     },
     {
         id: 4,
@@ -34,7 +37,8 @@ const products = [
         salePrice: 5490000,
         image: "assets/images/audio.png",
         badge: "-16%",
-        badgeType: "sale"
+        badgeType: "sale",
+        category: "audio"
     },
     {
         id: 5,
@@ -43,7 +47,8 @@ const products = [
         salePrice: 28990000,
         image: "assets/images/phone.png",
         badge: "Mới",
-        badgeType: "hot"
+        badgeType: "hot",
+        category: "phone"
     },
     {
         id: 6,
@@ -52,7 +57,8 @@ const products = [
         salePrice: 47990000,
         image: "assets/images/laptop.png",
         badge: "-12%",
-        badgeType: "sale"
+        badgeType: "sale",
+        category: "laptop"
     },
     {
         id: 7,
@@ -61,7 +67,8 @@ const products = [
         salePrice: 6990000,
         image: "assets/images/watch.png",
         badge: "-22%",
-        badgeType: "sale"
+        badgeType: "sale",
+        category: "watch"
     },
     {
         id: 8,
@@ -70,7 +77,8 @@ const products = [
         salePrice: 7290000,
         image: "assets/images/audio.png",
         badge: "Best Choice",
-        badgeType: "hot"
+        badgeType: "hot",
+        category: "audio"
     }
 ];
 
@@ -83,14 +91,49 @@ const formatCurrency = (value) => {
 };
 
 // Render Products
-const renderProducts = () => {
+const renderProducts = (filterCategory = 'all', searchQuery = '') => {
     const productGrid = document.getElementById('productGrid');
     
     if (!productGrid) return;
 
     productGrid.innerHTML = '';
     
-    products.forEach(product => {
+    let filteredProducts = filterCategory === 'all' 
+        ? products 
+        : products.filter(p => p.category === filterCategory);
+
+    if (searchQuery) {
+        const query = searchQuery.toLowerCase().trim();
+        filteredProducts = filteredProducts.filter(p => 
+            p.name.toLowerCase().includes(query) || 
+            p.category.toLowerCase().includes(query)
+        );
+    }
+
+    // Update Section Title
+    const sectionTitle = document.querySelector('.section-header h2');
+    if (sectionTitle) {
+        if (searchQuery) {
+            sectionTitle.textContent = `Kết quả tìm kiếm cho: "${searchQuery}"`;
+        } else if (filterCategory !== 'all') {
+            const categoryMap = {
+                'laptop': 'Laptop & Macbook',
+                'phone': 'Điện thoại thông minh',
+                'watch': 'Đồng hồ thông minh',
+                'audio': 'Phụ kiện Âm thanh'
+            };
+            sectionTitle.textContent = categoryMap[filterCategory] || 'Sản phẩm';
+        } else {
+            sectionTitle.textContent = 'Sản phẩm nổi bật';
+        }
+    }
+
+    if (filteredProducts.length === 0) {
+        productGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">Không tìm thấy sản phẩm nào khớp với tìm kiếm của bạn.</p>';
+        return;
+    }
+    
+    filteredProducts.forEach(product => {
         const badgeClass = product.badgeType === 'hot' ? 'badge-hot' : 'badge-sale';
         
         const cardHTML = `
@@ -295,11 +338,126 @@ const initAuth = () => {
     }
 };
 
+// ================= Category Filtering Logic =================
+const initCategoryFilter = () => {
+    const categoryItems = document.querySelectorAll('.category-item');
+    if (categoryItems.length === 0) return;
+
+    // 1. Handle Click on Category Items
+    categoryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const category = item.getAttribute('data-category');
+            
+            // UI Active State
+            categoryItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+            
+            // Filter & Render
+            renderProducts(category);
+            
+            // Scroll to products if needed
+            const productSec = document.getElementById('products');
+            if (productSec) {
+                const offset = 100;
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = productSec.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = elementPosition - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // 2. Handle Category from URL (for footer links or external)
+    const urlParams = new URLSearchParams(window.location.search);
+    const catParam = urlParams.get('cat');
+    if (catParam) {
+        const targetItem = document.querySelector(`.category-item[data-category="${catParam}"]`);
+        if (targetItem) {
+            targetItem.click();
+        } else {
+            renderProducts(catParam);
+        }
+    }
+};
+
+// ================= Back to Top Logic =================
+const initBackToTop = () => {
+    const backToTopBtn = document.getElementById('backToTop');
+    if (!backToTopBtn) return;
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+};
+
+// ================= Search Logic =================
+const initSearch = () => {
+    const searchInputs = document.querySelectorAll('.search-bar input');
+    const searchBtns = document.querySelectorAll('.search-bar button');
+
+    const handleSearch = (input) => {
+        const query = input.value.trim();
+        if (!query) return;
+
+        const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
+        
+        if (isHomePage) {
+            renderProducts('all', query);
+            // Optional: Scroll to products
+            const prodSec = document.getElementById('products');
+            if (prodSec) prodSec.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            window.location.href = `index.html?q=${encodeURIComponent(query)}#products`;
+        }
+    };
+
+    searchInputs.forEach(input => {
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSearch(input);
+        });
+    });
+
+    searchBtns.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            handleSearch(searchInputs[index]);
+        });
+    });
+
+    // Handle initial search from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const qParam = urlParams.get('q');
+    if (qParam) {
+        const searchInput = document.querySelector('.search-bar input');
+        if (searchInput) searchInput.value = qParam;
+        
+        renderProducts('all', qParam);
+    }
+};
+
 // Initialize App
 document.addEventListener('DOMContentLoaded', () => {
     initAuth();
     renderProducts();
+    initCategoryFilter();
     renderProductDetail();
+    initBackToTop();
+    initSearch();
     
     // Mobile menu toggle (simple version)
     const mobileToggle = document.querySelector('.mobile-toggle');

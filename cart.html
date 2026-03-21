@@ -17,6 +17,11 @@
                 <i class="fa-solid fa-bolt"></i> TechShop
             </a>
             
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm sản phẩm...">
+                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            
             <nav class="nav-menu">
                 <ul>
                     <li><a href="index.html">Trang chủ</a></li>
@@ -142,10 +147,10 @@
             <div class="footer-col">
                 <h3>Danh mục</h3>
                 <ul>
-                    <li><a href="index.html#products">Laptop & Macbook</a></li>
-                    <li><a href="index.html#products">Điện thoại thông minh</a></li>
-                    <li><a href="index.html#products">Đồng hồ thông minh</a></li>
-                    <li><a href="index.html#products">Phụ kiện âm thanh</a></li>
+                    <li><a href="index.html?cat=laptop#products">Laptop & Macbook</a></li>
+                    <li><a href="index.html?cat=phone#products">Điện thoại thông minh</a></li>
+                    <li><a href="index.html?cat=watch#products">Đồng hồ thông minh</a></li>
+                    <li><a href="index.html?cat=audio#products">Phụ kiện âm thanh</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -171,6 +176,9 @@
         </div>
     </footer>
 
+    <button id="backToTop" class="back-to-top" title="Cuộn lên đầu trang">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
     <script src="script.js"></script>
     <script>
         // Update mock cart count to 2

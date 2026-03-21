@@ -21,7 +21,7 @@
             
             <div class="search-bar">
                 <input type="text" placeholder="Tìm kiếm sản phẩm...">
-                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
             
             <nav class="nav-menu">
@@ -64,25 +64,31 @@
     <section class="categories">
         <div class="container">
             <div class="category-grid">
-                <div class="category-item">
+                <div class="category-item active" data-category="all">
+                    <div class="category-icon">
+                        <i class="fa-solid fa-border-all"></i>
+                    </div>
+                    <span>Tất cả</span>
+                </div>
+                <div class="category-item" data-category="laptop">
                     <div class="category-icon">
                         <i class="fa-solid fa-laptop"></i>
                     </div>
                     <span>Laptop</span>
                 </div>
-                <div class="category-item">
+                <div class="category-item" data-category="phone">
                     <div class="category-icon">
                         <i class="fa-solid fa-mobile-screen-button"></i>
                     </div>
                     <span>Điện thoại</span>
                 </div>
-                <div class="category-item">
+                <div class="category-item" data-category="watch">
                     <div class="category-icon">
                         <i class="fa-regular fa-clock"></i>
                     </div>
                     <span>Đồng hồ</span>
                 </div>
-                <div class="category-item">
+                <div class="category-item" data-category="audio">
                     <div class="category-icon">
                         <i class="fa-solid fa-headphones"></i>
                     </div>
@@ -124,10 +130,10 @@
             <div class="footer-col">
                 <h3>Danh mục</h3>
                 <ul>
-                    <li><a href="#">Laptop & Macbook</a></li>
-                    <li><a href="#">Điện thoại thông minh</a></li>
-                    <li><a href="#">Đồng hồ thông minh</a></li>
-                    <li><a href="#">Phụ kiện âm thanh</a></li>
+                    <li><a href="index.html?cat=laptop#products">Laptop & Macbook</a></li>
+                    <li><a href="index.html?cat=phone#products">Điện thoại thông minh</a></li>
+                    <li><a href="index.html?cat=watch#products">Đồng hồ thông minh</a></li>
+                    <li><a href="index.html?cat=audio#products">Phụ kiện âm thanh</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -155,6 +161,11 @@
 
     <!-- Toast Notification Container -->
     <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" title="Cuộn lên đầu trang">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
 
     <!-- Vanilla Javascript -->
     <script src="script.js"></script>
