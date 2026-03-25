@@ -168,11 +168,43 @@
                         <div style="display: flex; align-items: center; gap: 10px;"><span style="width: 30px;">1 <i class="fa-solid fa-star" style="color:#FFB800; font-size: 12px;"></i></span><div style="flex: 1; background: #e0e0e0; height: 8px; border-radius: 4px;"><div style="width: 1%; background: var(--primary-color); height: 100%; border-radius: 4px;"></div></div><span>1%</span></div>
                     </div>
                     <div>
-                        <button class="btn btn-primary">Viết đánh giá</button>
+                        <button class="btn btn-primary" id="btnWriteReview">Viết đánh giá</button>
                     </div>
                 </div>
+
+                <!-- Review Form Container -->
+                <div id="reviewSuccessMsg" class="review-success-msg">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <h3>Cảm ơn bạn đã đánh giá!</h3>
+                    <p>Đánh giá của bạn đã được gửi thành công và đang được chờ duyệt.</p>
+                </div>
+
+                <div id="reviewFormContainer" class="review-form-container">
+                    <form id="reviewForm" class="review-form">
+                        <h4>Viết đánh giá của bạn</h4>
+                        <div class="form-group">
+                            <label>Chọn đánh giá của bạn:</label>
+                            <div class="star-rating-input" id="starRatingInput">
+                                <i class="fa-solid fa-star" data-rating="1"></i>
+                                <i class="fa-solid fa-star" data-rating="2"></i>
+                                <i class="fa-solid fa-star" data-rating="3"></i>
+                                <i class="fa-solid fa-star" data-rating="4"></i>
+                                <i class="fa-solid fa-star" data-rating="5"></i>
+                            </div>
+                            <input type="hidden" id="selectedRating" value="5">
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewText">Nội dung đánh giá:</label>
+                            <textarea id="reviewText" placeholder="Chia sẻ trải nghiệm của bạn về sản phẩm này..." required></textarea>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
+                            <button type="button" class="btn" id="btnCancelReview" style="background: var(--bg-secondary); border: 1px solid var(--border-color);">Hủy</button>
+                        </div>
+                    </form>
+                </div>
                 
-                <div class="review-list">
+                <div class="review-list" id="reviewList">
                     <div class="review-card">
                         <div class="review-header">
                             <div class="reviewer-info">
@@ -292,6 +324,103 @@
                 document.querySelector('.main-image img').src = newSrc;
             });
         });
+
+        // Review Functionality
+        const btnWriteReview = document.getElementById('btnWriteReview');
+        const btnCancelReview = document.getElementById('btnCancelReview');
+        const reviewFormContainer = document.getElementById('reviewFormContainer');
+        const reviewForm = document.getElementById('reviewForm');
+        const starRatingInput = document.getElementById('starRatingInput');
+        const selectedRatingInput = document.getElementById('selectedRating');
+        const reviewSuccessMsg = document.getElementById('reviewSuccessMsg');
+        const reviewList = document.getElementById('reviewList');
+
+        if (btnWriteReview) {
+            btnWriteReview.addEventListener('click', () => {
+                reviewFormContainer.classList.toggle('show');
+                reviewSuccessMsg.style.display = 'none';
+            });
+        }
+
+        if (btnCancelReview) {
+            btnCancelReview.addEventListener('click', () => {
+                reviewFormContainer.classList.remove('show');
+            });
+        }
+
+        // Star rating selection
+        if (starRatingInput) {
+            const stars = starRatingInput.querySelectorAll('i');
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = this.getAttribute('data-rating');
+                    selectedRatingInput.value = rating;
+                    
+                    // Update visual state
+                    stars.forEach(s => {
+                        if (parseInt(s.getAttribute('data-rating')) <= parseInt(rating)) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            // Initialize with 5 stars
+            stars.forEach(s => s.classList.add('active'));
+        }
+
+        // Form submission
+        if (reviewForm) {
+            reviewForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const rating = selectedRatingInput.value;
+                const text = document.getElementById('reviewText').value;
+                const userName = "Khách hàng"; // Mock user name
+                
+                // Create new review element
+                const newReview = document.createElement('div');
+                newReview.className = 'review-card';
+                newReview.style.animation = 'fadeIn 0.5s ease';
+                
+                let starsHTML = '';
+                for(let i=1; i<=5; i++) {
+                    starsHTML += `<i class="fa-solid fa-star" style="${i <= rating ? '' : 'color: #e2e8f0;'}"></i>`;
+                }
+
+                newReview.innerHTML = `
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="avatar">${userName.charAt(0)}</div>
+                            <div>
+                                <div class="reviewer-name">${userName} <span style="color: var(--success); font-weight: normal; font-size: 12px; margin-left: 5px;"><i class="fa-solid fa-circle-check"></i> Đã mua hàng</span></div>
+                                <div class="rating-stars" style="font-size: 12px; margin-top: 5px;">
+                                    ${starsHTML}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-date">Vừa xong</div>
+                    </div>
+                    <div class="review-content">
+                        ${text}
+                    </div>
+                `;
+
+                // Prepend to list
+                reviewList.insertBefore(newReview, reviewList.firstChild);
+
+                // UI feedback
+                reviewFormContainer.classList.remove('show');
+                reviewSuccessMsg.style.display = 'block';
+                reviewForm.reset();
+                showToast('Gửi đánh giá thành công!');
+                
+                // Reset stars to 5
+                starRatingInput.querySelectorAll('i').forEach(s => s.classList.add('active'));
+                selectedRatingInput.value = 5;
+            });
+        }
     </script>
 </body>
 </html>
