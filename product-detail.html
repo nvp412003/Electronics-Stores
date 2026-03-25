@@ -279,6 +279,19 @@
                 this.classList.add('active');
             });
         });
+
+        // Thumbnail switching logic
+        document.querySelectorAll('.thumbnail').forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                // Update active class
+                document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update main image src
+                const newSrc = this.querySelector('img').src;
+                document.querySelector('.main-image img').src = newSrc;
+            });
+        });
     </script>
 </body>
 </html>

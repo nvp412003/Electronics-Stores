@@ -338,6 +338,19 @@ const initAuth = () => {
     }
 };
 
+// 6. Forgot Password Action
+const initForgotPassword = () => {
+    const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+    if (forgotPasswordForm) {
+        forgotPasswordForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            showToast(`Yêu cầu khôi phục mật khẩu đã được gửi tới ${email}. Vui lòng kiểm tra hộp thư!`);
+            setTimeout(() => { window.location.href = 'login.html'; }, 3000);
+        });
+    }
+};
+
 // ================= Category Filtering Logic =================
 const initCategoryFilter = () => {
     const categoryItems = document.querySelectorAll('.category-item');
@@ -453,6 +466,7 @@ const initSearch = () => {
 // Initialize App
 document.addEventListener('DOMContentLoaded', () => {
     initAuth();
+    initForgotPassword();
     renderProducts();
     initCategoryFilter();
     renderProductDetail();
