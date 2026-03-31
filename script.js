@@ -584,8 +584,45 @@ const initSearch = () => {
     }
 };
 
+// ================= Theme Toggle Logic =================
+const initTheme = () => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Inject Toggle Button if not present
+    const headerContainer = document.querySelector('.header-container');
+    if (headerContainer && !document.getElementById('themeToggle')) {
+        const cartIcon = headerContainer.querySelector('.cart-icon');
+        const themeBtn = document.createElement('button');
+        themeBtn.id = 'themeToggle';
+        themeBtn.className = 'theme-toggle';
+        themeBtn.setAttribute('title', 'Chuyển đổi chế độ sáng/tối');
+        themeBtn.innerHTML = savedTheme === 'light' ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+        
+        // Insert before cart icon
+        if (cartIcon) {
+            headerContainer.insertBefore(themeBtn, cartIcon);
+        } else {
+            headerContainer.appendChild(themeBtn);
+        }
+
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            themeBtn.innerHTML = newTheme === 'light' ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+            
+            showToast(`Đã chuyển sang chế độ ${newTheme === 'light' ? 'sáng' : 'tối'}`);
+        });
+    }
+};
+
 // Initialize App
 document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
     initAuth();
     initForgotPassword();
     initOrderActions();

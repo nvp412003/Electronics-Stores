@@ -11,7 +11,7 @@
 }
 
 .auth-card {
-    background-color: white;
+    background-color: var(--bg-card);
     width: 100%;
     max-width: 450px;
     padding: 40px;
@@ -134,7 +134,7 @@
     padding: 10px;
     border-radius: 8px;
     border: 1px solid var(--border-color);
-    background: white;
+    background: var(--bg-card);
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -201,7 +201,7 @@
 }
 
 .main-image {
-    background: #f8f9fa;
+    background: var(--bg-input);
     border-radius: var(--radius-lg);
     padding: 40px;
     display: flex;
@@ -225,7 +225,7 @@
     border-radius: 8px;
     border: 2px solid transparent;
     padding: 10px;
-    background: #f8f9fa;
+    background: var(--bg-input);
     cursor: pointer;
     transition: var(--transition);
 }
@@ -377,7 +377,7 @@
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease-out, margin 0.5s ease;
-    background: white;
+    background: var(--bg-card);
     border-radius: var(--radius-md);
     border: 1px solid transparent;
 }
@@ -456,7 +456,7 @@
 }
 
 .cart-items {
-    background: white;
+    background: var(--bg-card);
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
     overflow: hidden;
@@ -492,7 +492,7 @@
 .cart-product-img {
     width: 80px;
     height: 80px;
-    background: #f8f9fa;
+    background: var(--bg-input);
     border-radius: 8px;
     padding: 10px;
     display: flex;
@@ -536,6 +536,8 @@
     height: 30px;
     border: none;
     text-align: center;
+    background: var(--bg-card);
+    color: var(--text-main);
     border-left: 1px solid var(--border-color);
     border-right: 1px solid var(--border-color);
     outline: none;
@@ -560,7 +562,7 @@
 
 /* Cart Summary */
 .cart-summary {
-    background: white;
+    background: var(--bg-card);
     padding: 25px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
@@ -606,7 +608,7 @@
 }
 
 .checkout-form-section {
-    background: white;
+    background: var(--bg-card);
     padding: 30px;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
@@ -659,7 +661,7 @@
 
 /* ====== About Page ====== */
 .about-hero {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #0044aa 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
     color: white;
     padding: 80px 0;
     text-align: center;
@@ -715,7 +717,7 @@
 
 .feature-card {
     padding: 40px 30px;
-    background: white;
+    background: var(--bg-card);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--border-color);
@@ -777,7 +779,7 @@
 }
 
 .profile-sidebar {
-    background: white;
+    background: var(--bg-card);
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
     padding: 20px 0;
@@ -873,7 +875,7 @@
     padding: 8px 16px;
     border-radius: 50px;
     border: 1px solid var(--border-color);
-    background: white;
+    background: var(--bg-card);
     font-weight: 500;
     white-space: nowrap;
 }

@@ -7,6 +7,8 @@
     --text-muted: #666666;
     --bg-main: #ffffff;
     --bg-secondary: #f5f7fa;
+    --bg-card: #ffffff;
+    --bg-input: #f5f7fa;
     --border-color: #eaeaea;
     --danger: #FF3B30;
     --success: #34C759;
@@ -16,6 +18,30 @@
     --radius-md: 12px;
     --radius-lg: 20px;
     --transition: all 0.3s ease;
+    --header-bg: rgba(255, 255, 255, 0.95);
+    --hero-gradient: linear-gradient(135deg, var(--bg-secondary) 0%, #ffffff 100%);
+    --footer-bg: #111827;
+    --footer-text: #9ca3af;
+    --footer-heading: #ffffff;
+}
+
+[data-theme="dark"] {
+    --primary-color: #3d8bff;
+    --primary-hover: #5c9eff;
+    --primary-light: #1a2a44;
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+    --bg-main: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-card: #1e293b;
+    --bg-input: #334155;
+    --border-color: #334155;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.4);
+    --header-bg: rgba(15, 23, 42, 0.95);
+    --hero-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    --footer-bg: #020617;
 }
 
 /* ====== Reset & Global ====== */
@@ -94,7 +120,7 @@ img {
     position: sticky;
     top: 0;
     z-index: 100;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: var(--header-bg);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     padding: 15px 0;
@@ -122,7 +148,7 @@ img {
     max-width: 400px;
     display: flex;
     position: relative;
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-input);
     border-radius: 50px;
     padding: 5px;
     border: 1px solid transparent;
@@ -142,6 +168,7 @@ img {
     padding: 10px 20px;
     outline: none;
     font-size: 14px;
+    color: var(--text-main);
 }
 
 .search-bar button {
@@ -196,7 +223,7 @@ img {
     align-items: center;
     justify-content: center;
     padding: 0 5px;
-    border: 2px solid white;
+    border: 2px solid var(--bg-main);
 }
 
 .cart-count.bump {
@@ -217,7 +244,7 @@ img {
 
 /* ====== Hero Section ====== */
 .hero {
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, #ffffff 100%);
+    background: var(--hero-gradient);
     padding: 60px 0 80px;
     overflow: hidden;
 }
@@ -248,7 +275,7 @@ img {
     font-size: 48px;
     line-height: 1.1;
     margin-bottom: 20px;
-    color: #0b132a;
+    color: var(--text-main);
 }
 
 .hero p {
@@ -293,7 +320,7 @@ img {
 }
 
 .category-item {
-    background: white;
+    background: var(--bg-card);
     padding: 20px 30px;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
@@ -376,7 +403,7 @@ img {
 }
 
 .product-card {
-    background-color: white;
+    background-color: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     overflow: hidden;
@@ -418,7 +445,7 @@ img {
     position: relative;
     overflow: hidden;
     aspect-ratio: 1/1;
-    background-color: #f8f9fa;
+    background-color: var(--bg-input);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -497,7 +524,7 @@ img {
 
 /* ====== Footer ====== */
 .footer {
-    background-color: #111827;
+    background-color: var(--footer-bg);
     color: white;
     padding: 80px 0 20px;
 }
@@ -644,7 +671,7 @@ img {
 }
 
 .toast {
-    background-color: #ffffff;
+    background-color: var(--bg-card);
     border-left: 4px solid var(--success);
     padding: 15px 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -672,6 +699,27 @@ img {
     font-weight: 500;
     margin: 0;
     font-size: 14px;
+}
+
+/* ====== Theme Toggle ====== */
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--text-main);
+    background-color: var(--bg-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    transform: rotate(15deg);
 }
 
 /* ====== Responsive ====== */
