@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản trị - TechShop Admin</title>
+    <meta name="description" content="Trang quản trị hệ thống TechShop - Quản lý sản phẩm, đơn hàng, khách hàng">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="admin-wrapper">
+        <!-- ====== Sidebar ====== -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="sidebar-logo">
+                    <i class="fa-solid fa-bolt"></i>
+                    <div>
+                        TechShop
+                        <span>Admin Panel</span>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Menu chính</div>
+                <ul>
+                    <li><a href="#" class="active" data-page="dashboard" id="nav-dashboard">
+                        <i class="fa-solid fa-chart-pie"></i> Tổng quan
+                    </a></li>
+                    <li><a href="#" data-page="products" id="nav-products">
+                        <i class="fa-solid fa-box"></i> Sản phẩm
+                    </a></li>
+                    <li><a href="#" data-page="orders" id="nav-orders">
+                        <i class="fa-solid fa-receipt"></i> Đơn hàng
+                        <span class="nav-badge">3</span>
+                    </a></li>
+                    <li><a href="#" data-page="customers" id="nav-customers">
+                        <i class="fa-solid fa-users"></i> Khách hàng
+                    </a></li>
+                </ul>
+
+                <div class="nav-section-title">Hệ thống</div>
+                <ul>
+                    <li><a href="#" data-page="settings" id="nav-settings">
+                        <i class="fa-solid fa-gear"></i> Cài đặt
+                    </a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar">A</div>
+                    <div class="sidebar-user-info">
+                        <h4>Admin</h4>
+                        <p>admin@techshop.vn</p>
+                    </div>
+                </div>
+                <button class="btn-logout-sidebar" id="adminLogout" onclick="window.location.href='index.html'">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+                </button>
+            </div>
+        </aside>
+
+        <!-- ====== Main Content ====== -->
+        <main class="admin-main">
+            <!-- Top Bar -->
+            <header class="admin-topbar">
+                <div class="topbar-left">
+                    <button class="btn-sidebar-toggle" id="sidebarToggle">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="topbar-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Tìm kiếm..." id="adminGlobalSearch">
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <button class="topbar-btn" id="adminThemeToggle" title="Chuyển đổi chế độ sáng/tối">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                    <button class="topbar-btn" title="Thông báo">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="notif-dot"></span>
+                    </button>
+                    <a href="index.html" class="topbar-btn" title="Xem cửa hàng">
+                        <i class="fa-solid fa-store"></i>
+                    </a>
+                    <div class="topbar-avatar">A</div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="admin-content">
+
+                <!-- ========== PAGE: DASHBOARD ========== -->
+                <div class="admin-page active" id="page-dashboard">
+                    <div class="page-header">
+                        <div>
+                            <h1>Tổng quan</h1>
+                            <p>Xin chào, Admin! Đây là tổng quan cửa hàng hôm nay.</p>
+                        </div>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="stats-grid" id="statsGrid">
+                        <!-- Rendered by JS -->
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <h3>Doanh thu theo tháng</h3>
+                                <div class="chart-period">
+                                    <button class="active" data-period="6m">6 tháng</button>
+                                    <button data-period="12m">12 tháng</button>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="revenueChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <h3>Theo danh mục</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="categoryChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Orders -->
+                    <div class="recent-section">
+                        <div class="data-card">
+                            <div class="data-card-header">
+                                <h3><i class="fa-solid fa-clock-rotate-left"></i> Đơn hàng gần đây</h3>
+                                <button class="btn-admin btn-admin-secondary btn-sm" onclick="switchAdminPage('orders')">
+                                    Xem tất cả <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div style="overflow-x: auto;">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Mã đơn</th>
+                                            <th>Khách hàng</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Trạng thái</th>
+                                            <th>Ngày đặt</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recentOrdersBody">
+                                        <!-- Rendered by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== PAGE: PRODUCTS ========== -->
+                <div class="admin-page" id="page-products">
+                    <div class="page-header">
+                        <div>
+                            <h1>Quản lý sản phẩm</h1>
+                            <p>Thêm, chỉnh sửa và quản lý sản phẩm của cửa hàng.</p>
+                        </div>
+                        <button class="btn-admin btn-admin-primary" id="btnAddProduct">
+                            <i class="fa-solid fa-plus"></i> Thêm sản phẩm
+                        </button>
+                    </div>
+
+                    <div class="data-card">
+                        <div class="data-card-header">
+                            <h3>Danh sách sản phẩm</h3>
+                            <div class="data-card-actions">
+                                <select class="filter-select" id="filterCategory">
+                                    <option value="all">Tất cả danh mục</option>
+                                    <option value="laptop">Laptop</option>
+                                    <option value="phone">Điện thoại</option>
+                                    <option value="watch">Đồng hồ</option>
+                                    <option value="audio">Âm thanh</option>
+                                </select>
+                                <div class="search-wrapper">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" class="search-input-small" placeholder="Tìm sản phẩm..." id="searchProduct">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="admin-table" id="productsTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Danh mục</th>
+                                        <th>Giá bán</th>
+                                        <th>Giá gốc</th>
+                                        <th>Tồn kho</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productsBody">
+                                    <!-- Rendered by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-footer">
+                            <div class="table-info" id="productsInfo">Hiển thị 1-8 trong 8 sản phẩm</div>
+                            <div class="pagination" id="productsPagination"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== PAGE: ORDERS ========== -->
+                <div class="admin-page" id="page-orders">
+                    <div class="page-header">
+                        <div>
+                            <h1>Quản lý đơn hàng</h1>
+                            <p>Theo dõi và cập nhật trạng thái đơn hàng.</p>
+                        </div>
+                    </div>
+
+                    <div class="data-card">
+                        <div class="data-card-header">
+                            <h3>Tất cả đơn hàng</h3>
+                            <div class="data-card-actions">
+                                <select class="filter-select" id="filterOrderStatus">
+                                    <option value="all">Tất cả trạng thái</option>
+                                    <option value="pending">Chờ xác nhận</option>
+                                    <option value="confirmed">Đã xác nhận</option>
+                                    <option value="shipping">Đang giao</option>
+                                    <option value="delivered">Đã giao</option>
+                                    <option value="cancelled">Đã hủy</option>
+                                </select>
+                                <div class="search-wrapper">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" class="search-input-small" placeholder="Tìm đơn hàng..." id="searchOrder">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="admin-table" id="ordersTable">
+                                <thead>
+                                    <tr>
+                                        <th>Mã đơn</th>
+                                        <th>Khách hàng</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Tổng tiền</th>
+                                        <th>Trạng thái</th>
+                                        <th>Ngày đặt</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ordersBody">
+                                    <!-- Rendered by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-footer">
+                            <div class="table-info" id="ordersInfo">Hiển thị 1-5 trong 5 đơn hàng</div>
+                            <div class="pagination" id="ordersPagination"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== PAGE: CUSTOMERS ========== -->
+                <div class="admin-page" id="page-customers">
+                    <div class="page-header">
+                        <div>
+                            <h1>Quản lý khách hàng</h1>
+                            <p>Xem thông tin và quản lý tài khoản khách hàng.</p>
+                        </div>
+                    </div>
+
+                    <div class="data-card">
+                        <div class="data-card-header">
+                            <h3>Danh sách khách hàng</h3>
+                            <div class="data-card-actions">
+                                <div class="search-wrapper">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" class="search-input-small" placeholder="Tìm khách hàng..." id="searchCustomer">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="admin-table" id="customersTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Khách hàng</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Tổng đơn</th>
+                                        <th>Tổng chi tiêu</th>
+                                        <th>Hạng</th>
+                                        <th>Ngày tham gia</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="customersBody">
+                                    <!-- Rendered by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-footer">
+                            <div class="table-info" id="customersInfo">Hiển thị 1-5 trong 5 khách hàng</div>
+                            <div class="pagination" id="customersPagination"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== PAGE: SETTINGS ========== -->
+                <div class="admin-page" id="page-settings">
+                    <div class="page-header">
+                        <div>
+                            <h1>Cài đặt</h1>
+                            <p>Cấu hình hệ thống và thông tin cửa hàng.</p>
+                        </div>
+                    </div>
+
+                    <div class="settings-grid">
+                        <!-- Store Info -->
+                        <div class="settings-card">
+                            <h3><i class="fa-solid fa-store"></i> Thông tin cửa hàng</h3>
+                            <form class="admin-form" id="storeSettingsForm">
+                                <div class="form-group">
+                                    <label>Tên cửa hàng</label>
+                                    <input type="text" value="TechShop" id="settingStoreName">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email liên hệ</label>
+                                    <input type="email" value="contact@techshop.vn" id="settingStoreEmail">
+                                </div>
+                                <div class="form-group">
+                                    <label>Số điện thoại</label>
+                                    <input type="tel" value="1900 xxxx" id="settingStorePhone">
+                                </div>
+                                <div class="form-group">
+                                    <label>Địa chỉ</label>
+                                    <input type="text" value="123 Nguyễn Huệ, Q.1, TP. Hồ Chí Minh" id="settingStoreAddress">
+                                </div>
+                                <button type="button" class="btn-admin btn-admin-primary" onclick="saveSettings()">
+                                    <i class="fa-solid fa-check"></i> Lưu thay đổi
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- General Settings -->
+                        <div class="settings-card">
+                            <h3><i class="fa-solid fa-sliders"></i> Cài đặt chung</h3>
+                            <div class="settings-item">
+                                <div>
+                                    <div class="settings-item-label">Thông báo email</div>
+                                    <div class="settings-item-desc">Nhận email khi có đơn hàng mới</div>
+                                </div>
+                                <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+                            </div>
+                            <div class="settings-item">
+                                <div>
+                                    <div class="settings-item-label">Chế độ bảo trì</div>
+                                    <div class="settings-item-desc">Tạm đóng cửa hàng để bảo trì</div>
+                                </div>
+                                <button class="toggle-switch" onclick="this.classList.toggle('active')"></button>
+                            </div>
+                            <div class="settings-item">
+                                <div>
+                                    <div class="settings-item-label">Đăng ký thành viên</div>
+                                    <div class="settings-item-desc">Cho phép đăng ký tài khoản mới</div>
+                                </div>
+                                <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+                            </div>
+                            <div class="settings-item">
+                                <div>
+                                    <div class="settings-item-label">Đánh giá sản phẩm</div>
+                                    <div class="settings-item-desc">Cho phép khách hàng đánh giá</div>
+                                </div>
+                                <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+                            </div>
+                            <div class="settings-item">
+                                <div>
+                                    <div class="settings-item-label">Giao diện tối (Dark Mode)</div>
+                                    <div class="settings-item-desc">Chuyển sang giao diện tối cho admin</div>
+                                </div>
+                                <button class="toggle-switch" id="settingDarkMode" onclick="toggleAdminDarkMode(this)"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- ====== Product Modal ====== -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="productModalTitle">Thêm sản phẩm mới</h3>
+                <button class="modal-close" onclick="closeModal('productModal')">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="admin-form" id="productForm">
+                    <input type="hidden" id="productEditId">
+                    <div class="form-group">
+                        <label>Tên sản phẩm <span class="required">*</span></label>
+                        <input type="text" id="productName" placeholder="Nhập tên sản phẩm" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Danh mục <span class="required">*</span></label>
+                            <select id="productCategory" required>
+                                <option value="">Chọn danh mục</option>
+                                <option value="laptop">Laptop</option>
+                                <option value="phone">Điện thoại</option>
+                                <option value="watch">Đồng hồ</option>
+                                <option value="audio">Âm thanh</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tồn kho</label>
+                            <input type="number" id="productStock" placeholder="0" min="0">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Giá bán <span class="required">*</span></label>
+                            <input type="number" id="productSalePrice" placeholder="VND" required min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Giá gốc</label>
+                            <input type="number" id="productOriginalPrice" placeholder="VND" min="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Badge</label>
+                        <div class="form-row">
+                            <input type="text" id="productBadge" placeholder="VD: -16%, Mới, Hot...">
+                            <select id="productBadgeType">
+                                <option value="sale">Sale (đỏ)</option>
+                                <option value="hot">Hot (cam)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Hình ảnh (đường dẫn)</label>
+                        <input type="text" id="productImage" placeholder="assets/images/product.png">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-admin btn-admin-secondary" onclick="closeModal('productModal')">Hủy</button>
+                <button class="btn-admin btn-admin-primary" id="btnSaveProduct">
+                    <i class="fa-solid fa-check"></i> Lưu sản phẩm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== Order Detail Modal ====== -->
+    <div class="modal-overlay" id="orderDetailModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="orderDetailTitle">Chi tiết đơn hàng</h3>
+                <button class="modal-close" onclick="closeModal('orderDetailModal')">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="orderDetailBody">
+                <!-- Rendered by JS -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-admin btn-admin-secondary" onclick="closeModal('orderDetailModal')">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== Delete Confirm Modal ====== -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal" style="max-width: 420px;">
+            <div class="modal-header">
+                <h3>Xác nhận xóa</h3>
+                <button class="modal-close" onclick="closeModal('deleteModal')">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center; padding: 30px;">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 48px; color: #f59e0b; margin-bottom: 16px;"></i>
+                <h4 style="margin-bottom: 8px;">Bạn có chắc chắn muốn xóa?</h4>
+                <p style="color: var(--text-muted); font-size: 14px;" id="deleteMessage">Hành động này không thể hoàn tác.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-admin btn-admin-secondary" onclick="closeModal('deleteModal')">Hủy</button>
+                <button class="btn-admin btn-admin-danger" id="btnConfirmDelete">
+                    <i class="fa-solid fa-trash"></i> Xóa
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
