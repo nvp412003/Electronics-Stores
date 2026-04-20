@@ -49,10 +49,30 @@
                     <li><a href="#" data-page="customers" id="nav-customers">
                         <i class="fa-solid fa-users"></i> Khách hàng
                     </a></li>
+                    <li><a href="#" data-page="coupons" id="nav-coupons">
+                        <i class="fa-solid fa-ticket"></i> Mã giảm giá
+                    </a></li>
+                    <li><a href="#" data-page="reviews" id="nav-reviews">
+                        <i class="fa-solid fa-star"></i> Đánh giá
+                        <span class="nav-badge nav-badge-warning">5</span>
+                    </a></li>
+                </ul>
+
+                <div class="nav-section-title">Phân tích</div>
+                <ul>
+                    <li><a href="#" data-page="reports" id="nav-reports">
+                        <i class="fa-solid fa-chart-bar"></i> Báo cáo
+                    </a></li>
+                    <li><a href="#" data-page="activity" id="nav-activity">
+                        <i class="fa-solid fa-clock-rotate-left"></i> Nhật ký
+                    </a></li>
                 </ul>
 
                 <div class="nav-section-title">Hệ thống</div>
                 <ul>
+                    <li><a href="#" data-page="users" id="nav-users">
+                        <i class="fa-solid fa-user-shield"></i> Quản trị viên
+                    </a></li>
                     <li><a href="#" data-page="settings" id="nav-settings">
                         <i class="fa-solid fa-gear"></i> Cài đặt
                     </a></li>
@@ -90,14 +110,49 @@
                     <button class="topbar-btn" id="adminThemeToggle" title="Chuyển đổi chế độ sáng/tối">
                         <i class="fa-solid fa-moon"></i>
                     </button>
-                    <button class="topbar-btn" title="Thông báo">
-                        <i class="fa-solid fa-bell"></i>
-                        <span class="notif-dot"></span>
-                    </button>
+                    <!-- Notification Bell with Dropdown -->
+                    <div class="notif-wrapper" id="notifWrapper">
+                        <button class="topbar-btn" id="notifToggle" title="Thông báo">
+                            <i class="fa-solid fa-bell"></i>
+                            <span class="notif-dot"></span>
+                            <span class="notif-count" id="notifCount">4</span>
+                        </button>
+                        <div class="notif-dropdown" id="notifDropdown">
+                            <div class="notif-dropdown-header">
+                                <h4>Thông báo</h4>
+                                <button class="notif-mark-all" id="notifMarkAll">Đánh dấu đã đọc</button>
+                            </div>
+                            <div class="notif-dropdown-body" id="notifBody">
+                                <!-- Rendered by JS -->
+                            </div>
+                            <div class="notif-dropdown-footer">
+                                <button onclick="switchAdminPage('activity')">Xem tất cả hoạt động</button>
+                            </div>
+                        </div>
+                    </div>
                     <a href="index.html" class="topbar-btn" title="Xem cửa hàng">
                         <i class="fa-solid fa-store"></i>
                     </a>
-                    <div class="topbar-avatar">A</div>
+                    <div class="topbar-avatar-wrapper" id="avatarWrapper">
+                        <div class="topbar-avatar">A</div>
+                        <div class="avatar-dropdown" id="avatarDropdown">
+                            <div class="avatar-dropdown-header">
+                                <div class="avatar-dropdown-avatar">A</div>
+                                <div>
+                                    <h4>Admin</h4>
+                                    <p>admin@techshop.vn</p>
+                                </div>
+                            </div>
+                            <div class="avatar-dropdown-body">
+                                <a href="#" onclick="switchAdminPage('settings'); closeAllDropdowns();"><i class="fa-solid fa-gear"></i> Cài đặt</a>
+                                <a href="#" onclick="switchAdminPage('activity'); closeAllDropdowns();"><i class="fa-solid fa-clock-rotate-left"></i> Nhật ký</a>
+                                <a href="#" onclick="switchAdminPage('users'); closeAllDropdowns();"><i class="fa-solid fa-user-shield"></i> Quản trị viên</a>
+                            </div>
+                            <div class="avatar-dropdown-footer">
+                                <a href="index.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </header>
 
@@ -110,6 +165,11 @@
                         <div>
                             <h1>Tổng quan</h1>
                             <p>Xin chào, Admin! Đây là tổng quan cửa hàng hôm nay.</p>
+                        </div>
+                        <div class="page-header-actions">
+                            <button class="btn-admin btn-admin-secondary btn-sm" id="btnExportDashboard">
+                                <i class="fa-solid fa-download"></i> Xuất báo cáo
+                            </button>
                         </div>
                     </div>
 
@@ -140,6 +200,34 @@
                                 <canvas id="categoryChart"></canvas>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="quick-actions-grid">
+                        <button class="quick-action-card" onclick="switchAdminPage('products'); setTimeout(openAddProduct, 100);">
+                            <div class="quick-action-icon" style="background: rgba(59,130,246,0.1); color: #3b82f6;">
+                                <i class="fa-solid fa-plus"></i>
+                            </div>
+                            <span>Thêm sản phẩm</span>
+                        </button>
+                        <button class="quick-action-card" onclick="switchAdminPage('orders')">
+                            <div class="quick-action-icon" style="background: rgba(34,197,94,0.1); color: #22c55e;">
+                                <i class="fa-solid fa-receipt"></i>
+                            </div>
+                            <span>Xem đơn hàng</span>
+                        </button>
+                        <button class="quick-action-card" onclick="switchAdminPage('coupons'); setTimeout(openAddCoupon, 100);">
+                            <div class="quick-action-icon" style="background: rgba(245,158,11,0.1); color: #f59e0b;">
+                                <i class="fa-solid fa-ticket"></i>
+                            </div>
+                            <span>Tạo mã giảm giá</span>
+                        </button>
+                        <button class="quick-action-card" onclick="switchAdminPage('reports')">
+                            <div class="quick-action-icon" style="background: rgba(139,92,246,0.1); color: #8b5cf6;">
+                                <i class="fa-solid fa-chart-bar"></i>
+                            </div>
+                            <span>Xem báo cáo</span>
+                        </button>
                     </div>
 
                     <!-- Recent Orders -->
@@ -232,6 +320,14 @@
                             <h1>Quản lý đơn hàng</h1>
                             <p>Theo dõi và cập nhật trạng thái đơn hàng.</p>
                         </div>
+                        <button class="btn-admin btn-admin-secondary" id="btnExportOrders">
+                            <i class="fa-solid fa-file-export"></i> Xuất Excel
+                        </button>
+                    </div>
+
+                    <!-- Order Stats -->
+                    <div class="mini-stats-grid" id="orderStatsGrid">
+                        <!-- Rendered by JS -->
                     </div>
 
                     <div class="data-card">
@@ -284,12 +380,27 @@
                             <h1>Quản lý khách hàng</h1>
                             <p>Xem thông tin và quản lý tài khoản khách hàng.</p>
                         </div>
+                        <button class="btn-admin btn-admin-secondary" id="btnExportCustomers">
+                            <i class="fa-solid fa-file-export"></i> Xuất danh sách
+                        </button>
+                    </div>
+
+                    <!-- Customer Stats -->
+                    <div class="mini-stats-grid" id="customerStatsGrid">
+                        <!-- Rendered by JS -->
                     </div>
 
                     <div class="data-card">
                         <div class="data-card-header">
                             <h3>Danh sách khách hàng</h3>
                             <div class="data-card-actions">
+                                <select class="filter-select" id="filterCustomerTier">
+                                    <option value="all">Tất cả hạng</option>
+                                    <option value="Kim Cương">Kim Cương</option>
+                                    <option value="Vàng">Vàng</option>
+                                    <option value="Bạc">Bạc</option>
+                                    <option value="Đồng">Đồng</option>
+                                </select>
                                 <div class="search-wrapper">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                     <input type="text" class="search-input-small" placeholder="Tìm khách hàng..." id="searchCustomer">
@@ -307,6 +418,7 @@
                                         <th>Tổng chi tiêu</th>
                                         <th>Hạng</th>
                                         <th>Ngày tham gia</th>
+                                        <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody id="customersBody">
@@ -318,6 +430,223 @@
                             <div class="table-info" id="customersInfo">Hiển thị 1-5 trong 5 khách hàng</div>
                             <div class="pagination" id="customersPagination"></div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- ========== PAGE: COUPONS ========== -->
+                <div class="admin-page" id="page-coupons">
+                    <div class="page-header">
+                        <div>
+                            <h1>Quản lý mã giảm giá</h1>
+                            <p>Tạo và quản lý các chương trình khuyến mãi.</p>
+                        </div>
+                        <button class="btn-admin btn-admin-primary" id="btnAddCoupon">
+                            <i class="fa-solid fa-plus"></i> Tạo mã giảm giá
+                        </button>
+                    </div>
+
+                    <!-- Coupon Stats -->
+                    <div class="mini-stats-grid" id="couponStatsGrid">
+                        <!-- Rendered by JS -->
+                    </div>
+
+                    <div class="data-card">
+                        <div class="data-card-header">
+                            <h3>Danh sách mã giảm giá</h3>
+                            <div class="data-card-actions">
+                                <select class="filter-select" id="filterCouponStatus">
+                                    <option value="all">Tất cả</option>
+                                    <option value="active">Đang hoạt động</option>
+                                    <option value="expired">Hết hạn</option>
+                                    <option value="disabled">Tắt</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="admin-table" id="couponsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Mã</th>
+                                        <th>Mô tả</th>
+                                        <th>Loại</th>
+                                        <th>Giá trị</th>
+                                        <th>Đã dùng</th>
+                                        <th>Hết hạn</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="couponsBody">
+                                    <!-- Rendered by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-footer">
+                            <div class="table-info" id="couponsInfo"></div>
+                            <div class="pagination" id="couponsPagination"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== PAGE: REVIEWS ========== -->
+                <div class="admin-page" id="page-reviews">
+                    <div class="page-header">
+                        <div>
+                            <h1>Quản lý đánh giá</h1>
+                            <p>Xem, phê duyệt và quản lý đánh giá của khách hàng.</p>
+                        </div>
+                    </div>
+
+                    <!-- Review Stats -->
+                    <div class="mini-stats-grid" id="reviewStatsGrid">
+                        <!-- Rendered by JS -->
+                    </div>
+
+                    <div class="data-card">
+                        <div class="data-card-header">
+                            <h3>Danh sách đánh giá</h3>
+                            <div class="data-card-actions">
+                                <select class="filter-select" id="filterReviewStatus">
+                                    <option value="all">Tất cả</option>
+                                    <option value="pending">Chờ duyệt</option>
+                                    <option value="approved">Đã duyệt</option>
+                                    <option value="rejected">Từ chối</option>
+                                </select>
+                                <select class="filter-select" id="filterReviewRating">
+                                    <option value="all">Tất cả sao</option>
+                                    <option value="5">5 sao</option>
+                                    <option value="4">4 sao</option>
+                                    <option value="3">3 sao</option>
+                                    <option value="2">2 sao</option>
+                                    <option value="1">1 sao</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="reviews-list" id="reviewsList">
+                            <!-- Rendered by JS -->
+                        </div>
+                        <div class="table-footer">
+                            <div class="table-info" id="reviewsInfo"></div>
+                            <div class="pagination" id="reviewsPagination"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== PAGE: REPORTS ========== -->
+                <div class="admin-page" id="page-reports">
+                    <div class="page-header">
+                        <div>
+                            <h1>Báo cáo & Phân tích</h1>
+                            <p>Thống kê chi tiết về hoạt động kinh doanh.</p>
+                        </div>
+                        <div class="page-header-actions">
+                            <select class="filter-select" id="reportPeriod">
+                                <option value="7d">7 ngày qua</option>
+                                <option value="30d" selected>30 ngày qua</option>
+                                <option value="90d">90 ngày qua</option>
+                                <option value="1y">1 năm</option>
+                            </select>
+                            <button class="btn-admin btn-admin-secondary btn-sm" id="btnExportReport">
+                                <i class="fa-solid fa-download"></i> Xuất PDF
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Report Stats -->
+                    <div class="stats-grid" id="reportStatsGrid">
+                        <!-- Rendered by JS -->
+                    </div>
+
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <h3>Doanh thu & Đơn hàng</h3>
+                            </div>
+                            <div class="chart-container" style="height: 320px;">
+                                <canvas id="reportRevenueChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <h3>Nguồn khách hàng</h3>
+                            </div>
+                            <div class="chart-container" style="height: 320px;">
+                                <canvas id="reportSourceChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="charts-grid" style="grid-template-columns: 1fr 1fr;">
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <h3>Sản phẩm bán chạy</h3>
+                            </div>
+                            <div class="top-products-list" id="topProductsList">
+                                <!-- Rendered by JS -->
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <h3>Tỷ lệ trạng thái đơn hàng</h3>
+                            </div>
+                            <div class="chart-container" style="height: 320px;">
+                                <canvas id="reportOrderStatusChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== PAGE: ACTIVITY LOG ========== -->
+                <div class="admin-page" id="page-activity">
+                    <div class="page-header">
+                        <div>
+                            <h1>Nhật ký hoạt động</h1>
+                            <p>Theo dõi tất cả các hành động được thực hiện trên hệ thống.</p>
+                        </div>
+                        <button class="btn-admin btn-admin-secondary btn-sm" id="btnClearLogs">
+                            <i class="fa-solid fa-trash"></i> Xóa nhật ký
+                        </button>
+                    </div>
+
+                    <div class="data-card">
+                        <div class="data-card-header">
+                            <h3>Lịch sử hoạt động</h3>
+                            <div class="data-card-actions">
+                                <select class="filter-select" id="filterActivityType">
+                                    <option value="all">Tất cả loại</option>
+                                    <option value="product">Sản phẩm</option>
+                                    <option value="order">Đơn hàng</option>
+                                    <option value="user">Người dùng</option>
+                                    <option value="coupon">Mã giảm giá</option>
+                                    <option value="review">Đánh giá</option>
+                                    <option value="system">Hệ thống</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="activity-timeline" id="activityTimeline">
+                            <!-- Rendered by JS -->
+                        </div>
+                        <div class="table-footer">
+                            <div class="table-info" id="activityInfo"></div>
+                            <div class="pagination" id="activityPagination"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== PAGE: ADMIN USERS ========== -->
+                <div class="admin-page" id="page-users">
+                    <div class="page-header">
+                        <div>
+                            <h1>Quản lý quản trị viên</h1>
+                            <p>Thêm, chỉnh sửa quyền và quản lý tài khoản quản trị.</p>
+                        </div>
+                        <button class="btn-admin btn-admin-primary" id="btnAddUser">
+                            <i class="fa-solid fa-plus"></i> Thêm quản trị viên
+                        </button>
+                    </div>
+
+                    <div class="admin-users-grid" id="adminUsersGrid">
+                        <!-- Rendered by JS -->
                     </div>
                 </div>
 
@@ -394,6 +723,68 @@
                                     <div class="settings-item-desc">Chuyển sang giao diện tối cho admin</div>
                                 </div>
                                 <button class="toggle-switch" id="settingDarkMode" onclick="toggleAdminDarkMode(this)"></button>
+                            </div>
+                        </div>
+
+                        <!-- Payment Settings -->
+                        <div class="settings-card">
+                            <h3><i class="fa-solid fa-credit-card"></i> Thanh toán</h3>
+                            <div class="settings-item">
+                                <div>
+                                    <div class="settings-item-label">Thanh toán COD</div>
+                                    <div class="settings-item-desc">Cho phép thanh toán khi nhận hàng</div>
+                                </div>
+                                <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+                            </div>
+                            <div class="settings-item">
+                                <div>
+                                    <div class="settings-item-label">Chuyển khoản ngân hàng</div>
+                                    <div class="settings-item-desc">Thanh toán qua chuyển khoản</div>
+                                </div>
+                                <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+                            </div>
+                            <div class="settings-item">
+                                <div>
+                                    <div class="settings-item-label">Ví MoMo</div>
+                                    <div class="settings-item-desc">Thanh toán qua ví MoMo</div>
+                                </div>
+                                <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+                            </div>
+                            <div class="settings-item">
+                                <div>
+                                    <div class="settings-item-label">VNPay</div>
+                                    <div class="settings-item-desc">Cổng thanh toán VNPay</div>
+                                </div>
+                                <button class="toggle-switch" onclick="this.classList.toggle('active')"></button>
+                            </div>
+                        </div>
+
+                        <!-- Shipping Settings -->
+                        <div class="settings-card">
+                            <h3><i class="fa-solid fa-truck"></i> Vận chuyển</h3>
+                            <form class="admin-form">
+                                <div class="form-group">
+                                    <label>Phí giao hàng mặc định</label>
+                                    <input type="text" value="30,000 VND" id="settingShippingFee">
+                                </div>
+                                <div class="form-group">
+                                    <label>Miễn phí đơn từ</label>
+                                    <input type="text" value="500,000 VND" id="settingFreeShipping">
+                                </div>
+                            </form>
+                            <div class="settings-item">
+                                <div>
+                                    <div class="settings-item-label">Giao hàng nhanh (GHN)</div>
+                                    <div class="settings-item-desc">Đối tác giao hàng nhanh</div>
+                                </div>
+                                <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+                            </div>
+                            <div class="settings-item">
+                                <div>
+                                    <div class="settings-item-label">Giao hàng tiết kiệm (GHTK)</div>
+                                    <div class="settings-item-desc">Đối tác giao hàng tiết kiệm</div>
+                                </div>
+                                <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
                             </div>
                         </div>
                     </div>
@@ -488,6 +879,174 @@
         </div>
     </div>
 
+    <!-- ====== Coupon Modal ====== -->
+    <div class="modal-overlay" id="couponModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="couponModalTitle">Tạo mã giảm giá mới</h3>
+                <button class="modal-close" onclick="closeModal('couponModal')">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="admin-form" id="couponForm">
+                    <input type="hidden" id="couponEditId">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Mã giảm giá <span class="required">*</span></label>
+                            <input type="text" id="couponCode" placeholder="VD: SALE20" required style="text-transform: uppercase;">
+                        </div>
+                        <div class="form-group">
+                            <label>Loại giảm giá <span class="required">*</span></label>
+                            <select id="couponType" required>
+                                <option value="percent">Phần trăm (%)</option>
+                                <option value="fixed">Số tiền cố định (VND)</option>
+                                <option value="freeship">Miễn phí vận chuyển</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Mô tả</label>
+                        <input type="text" id="couponDescription" placeholder="Mô tả ngắn về mã giảm giá">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Giá trị <span class="required">*</span></label>
+                            <input type="number" id="couponValue" placeholder="VD: 20" required min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Đơn tối thiểu (VND)</label>
+                            <input type="number" id="couponMinOrder" placeholder="0" min="0">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Số lượng sử dụng tối đa</label>
+                            <input type="number" id="couponMaxUse" placeholder="100" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày hết hạn <span class="required">*</span></label>
+                            <input type="date" id="couponExpiry" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-admin btn-admin-secondary" onclick="closeModal('couponModal')">Hủy</button>
+                <button class="btn-admin btn-admin-primary" id="btnSaveCoupon">
+                    <i class="fa-solid fa-check"></i> Lưu mã
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== Admin User Modal ====== -->
+    <div class="modal-overlay" id="userModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="userModalTitle">Thêm quản trị viên</h3>
+                <button class="modal-close" onclick="closeModal('userModal')">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="admin-form" id="userForm">
+                    <input type="hidden" id="userEditId">
+                    <div class="form-group">
+                        <label>Họ và tên <span class="required">*</span></label>
+                        <input type="text" id="userName" placeholder="Nhập họ tên" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email <span class="required">*</span></label>
+                        <input type="email" id="userEmail" placeholder="email@techshop.vn" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Vai trò <span class="required">*</span></label>
+                            <select id="userRole" required>
+                                <option value="">Chọn vai trò</option>
+                                <option value="superadmin">Super Admin</option>
+                                <option value="admin">Admin</option>
+                                <option value="editor">Biên tập viên</option>
+                                <option value="support">Hỗ trợ khách hàng</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Trạng thái</label>
+                            <select id="userStatus">
+                                <option value="active">Hoạt động</option>
+                                <option value="inactive">Tạm khóa</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="tel" id="userPhone" placeholder="0912345678">
+                    </div>
+                    <div class="form-group" id="userPasswordGroup">
+                        <label>Mật khẩu <span class="required">*</span></label>
+                        <input type="password" id="userPassword" placeholder="Tối thiểu 8 ký tự">
+                    </div>
+
+                    <!-- Permissions -->
+                    <div class="form-group">
+                        <label>Quyền hạn</label>
+                        <div class="permissions-grid">
+                            <label class="permission-item">
+                                <input type="checkbox" id="perm_products" checked> Quản lý sản phẩm
+                            </label>
+                            <label class="permission-item">
+                                <input type="checkbox" id="perm_orders" checked> Quản lý đơn hàng
+                            </label>
+                            <label class="permission-item">
+                                <input type="checkbox" id="perm_customers" checked> Quản lý khách hàng
+                            </label>
+                            <label class="permission-item">
+                                <input type="checkbox" id="perm_coupons"> Quản lý mã giảm giá
+                            </label>
+                            <label class="permission-item">
+                                <input type="checkbox" id="perm_reviews"> Quản lý đánh giá
+                            </label>
+                            <label class="permission-item">
+                                <input type="checkbox" id="perm_reports"> Xem báo cáo
+                            </label>
+                            <label class="permission-item">
+                                <input type="checkbox" id="perm_settings"> Cài đặt hệ thống
+                            </label>
+                            <label class="permission-item">
+                                <input type="checkbox" id="perm_users"> Quản lý quản trị viên
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-admin btn-admin-secondary" onclick="closeModal('userModal')">Hủy</button>
+                <button class="btn-admin btn-admin-primary" id="btnSaveUser">
+                    <i class="fa-solid fa-check"></i> Lưu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== Customer Detail Modal ====== -->
+    <div class="modal-overlay" id="customerDetailModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="customerDetailTitle">Chi tiết khách hàng</h3>
+                <button class="modal-close" onclick="closeModal('customerDetailModal')">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="customerDetailBody">
+                <!-- Rendered by JS -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-admin btn-admin-secondary" onclick="closeModal('customerDetailModal')">Đóng</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ====== Delete Confirm Modal ====== -->
     <div class="modal-overlay" id="deleteModal">
         <div class="modal" style="max-width: 420px;">
@@ -514,6 +1073,7 @@
     <!-- Toast Container -->
     <div id="toastContainer" class="toast-container"></div>
 
+    <script src="admin-data.js"></script>
     <script src="admin.js"></script>
 </body>
 </html>
